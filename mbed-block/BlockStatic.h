@@ -17,7 +17,7 @@
 #ifndef __BLOCKSTATIC_H__
 #define __BLOCKSTATIC_H__
 
-#include "mbed-block/block.h"
+#include "mbed-block/Block.h"
 
 class BlockStatic : public Block
 {
