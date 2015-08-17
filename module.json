@@ -16,7 +16,10 @@
     }
   ],
   "dependencies": {
-    "core-util": "ARMmbed/core-util#~0.0.1"
   },
-  "targetDependencies": {}
+  "targetDependencies": {
+    "mbed-os": {
+      "core-util": "ARMmbed/core-util#~0.0.1"
+    }
+  }
 }
