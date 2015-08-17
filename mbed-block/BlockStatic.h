@@ -79,12 +79,26 @@ public:
     */
     virtual uint8_t& operator[](const std::size_t index)
     {
-        return data[index];
+        if (data)
+        {
+            return data[index];
+        }
+        else
+        {
+            return shieldByte;
+        }
     }
 
     virtual uint8_t& at(const std::size_t index)
     {
-        return data[index];
+        if (data)
+        {
+            return data[index];
+        }
+        else
+        {
+            return shieldByte;
+        }
     }
 
     /*
@@ -116,6 +130,7 @@ public:
 
 private:
     uint8_t* data;
+    uint8_t shieldByte;
 };
 
 #endif // __BLOCKSTATIC_H__
