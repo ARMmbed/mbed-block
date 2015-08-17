@@ -18,7 +18,8 @@
 #define __BLOCKCOLLECTION_H__
 
 #include "mbed-block/Block.h"
-#include "mbed-util/Array.h"
+
+#include "mbed-block/ContainerWrapper.h"
 
 /*
     BlockCollection
@@ -40,9 +41,6 @@ public:
         Block::offset = 0;
         Block::maxLength = first->getLength();
 
-        UAllocTraits_t traits = {0};
-
-        blockArray.init(2, 1, traits);
         blockArray.push_back(first);
     }
 
@@ -55,7 +53,7 @@ public:
     {
         // iterate through the array to find Block matching location.
         for (std::size_t blockIndex = 0;
-             (blockIndex < blockArray.get_num_elements()) && (num > 0);
+             (blockIndex < blockArray.size()) && (num > 0);
              blockIndex++)
         {
             Block* currentBlock = blockArray.at(blockIndex);
@@ -103,7 +101,7 @@ public:
     {
         // iterate through the array to find Block matching location.
         for (std::size_t blockIndex = 0;
-             (blockIndex < blockArray.get_num_elements()) && (num > 0);
+             (blockIndex < blockArray.size()) && (num > 0);
              blockIndex++)
         {
             Block* currentBlock = blockArray.at(blockIndex);
@@ -167,7 +165,7 @@ public:
         {
             // go forwards in array starting from cachedIndex
             // to find Block matching location.
-            while ((cachedIndex < blockArray.get_num_elements()) && (index >= cachedEnd))
+            while ((cachedIndex < blockArray.size()) && (index >= cachedEnd))
             {
                 cachedIndex++;
                 cachedBlock = blockArray.at(cachedIndex);
@@ -203,7 +201,7 @@ public:
     {
         Block* retval = NULL;
 
-        std::size_t elements = blockArray.get_num_elements();
+        std::size_t elements = blockArray.size();
 
         if (elements > 0)
         {
@@ -226,10 +224,6 @@ protected:
         Block::length = 0;
         Block::offset = 0;
         Block::maxLength = 0;
-
-        UAllocTraits_t traits = {0};
-
-        blockArray.init(1, 1, traits);
     }
 
     /* Constructor with estimated number of fragments as input. */
@@ -243,14 +237,11 @@ protected:
         Block::length = 0;
         Block::offset = 0;
         Block::maxLength = 0;
-
-        UAllocTraits_t traits = {0};
-
-        blockArray.init(size, 1, traits);
     }
 
 private:
-    mbed::util::Array<Block*> blockArray;
+    ContainerWrapper<Block*> blockArray;
+
     Block* cachedBlock;
     std::size_t cachedStart;
     std::size_t cachedEnd;
