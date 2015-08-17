@@ -189,6 +189,61 @@ public:
         return at(index);
     }
 
+    /*  Get maxLength and length by combining lengths from all blocks in collection.
+    */
+    virtual uint32_t getMaxLength()
+    {
+        uint32_t maxLength = 0;
+
+        // iterate through container
+        for (std::size_t blockIndex = 0;
+             blockIndex < blockArray.size();
+             blockIndex++)
+        {
+            Block* currentBlock = blockArray.at(blockIndex);
+            maxLength += currentBlock->getMaxLength();
+        }
+
+        return maxLength;
+    }
+
+    virtual uint32_t getLength()
+    {
+        uint32_t length = 0;
+
+        // iterate through container
+        for (std::size_t blockIndex = 0;
+             blockIndex < blockArray.size();
+             blockIndex++)
+        {
+            Block* currentBlock = blockArray.at(blockIndex);
+            length += currentBlock->getLength();
+        }
+
+        return length;
+    }
+
+    /*  Set global length by modifying each block's length.
+    */
+    virtual void setLength(uint32_t length)
+    {
+        // iterate through container
+        for (std::size_t blockIndex = 0;
+             blockIndex < blockArray.size();
+             blockIndex++)
+        {
+            Block* currentBlock = blockArray.at(blockIndex);
+
+            uint32_t newLength = (length > currentBlock->getMaxLength())
+                                 ? currentBlock->getMaxLength()
+                                 : length;
+
+            currentBlock->setLength(newLength);
+
+            length -= newLength;
+        }
+    }
+
     void push_back(Block* block)
     {
         Block::length += block->getLength();
