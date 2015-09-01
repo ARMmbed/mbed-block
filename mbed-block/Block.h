@@ -17,6 +17,10 @@
 #ifndef __BLOCK_H__
 #define __BLOCK_H__
 
+#include <stdint.h>
+#include <cstddef>
+
+
 class Block
 {
 public:

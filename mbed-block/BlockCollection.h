@@ -289,6 +289,8 @@ protected:
             cachedEnd(0),
             cachedIndex(0)
     {
+        (void) size;
+
         Block::length = 0;
         Block::offset = 0;
         Block::maxLength = 0;

@@ -19,7 +19,9 @@
 
 #include "mbed-block/Block.h"
 
-class BlockStaticReadOnly : public Block
+#include <cstring>
+
+class BlockStaticReadOnly : public BlockStatic
 {
 public:
     BlockStaticReadOnly(const uint8_t* _data = NULL, uint32_t _length = 0)
@@ -78,6 +80,14 @@ public:
         }
 
         return shieldByte;
+    }
+
+    /*
+        Accessor.
+    */
+    const uint8_t* getData()
+    {
+        return data;
     }
 
 private:

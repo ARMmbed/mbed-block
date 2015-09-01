@@ -19,6 +19,8 @@
 
 #include "mbed-block/Block.h"
 
+#include <cstring>
+
 class BlockStatic : public Block
 {
 public:
@@ -121,7 +123,7 @@ public:
     }
 
     /*
-        Accessors and mutators.
+        Accessor.
     */
     uint8_t* getData()
     {
