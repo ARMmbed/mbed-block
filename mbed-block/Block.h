@@ -25,6 +25,7 @@ class Block
 {
 public:
 
+    virtual ~Block(void) {}
     /*
         Copy data into block object.
     */
@@ -43,17 +44,17 @@ public:
     /*
         Accessors and mutators.
     */
-    virtual uint32_t getMaxLength()
+    virtual uint32_t getMaxLength(void) const
     {
         return maxLength;
     }
 
-    virtual uint32_t getLength()
+    virtual uint32_t getLength(void) const
     {
         return length;
     }
 
-    virtual uint32_t getOffset()
+    virtual uint32_t getOffset(void) const
     {
         return offset;
     }
