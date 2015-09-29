@@ -18,9 +18,7 @@
   "dependencies": {},
   "targetDependencies": {
     "mbed-os": {
-      "mbed-drivers": "~0.8.3",
-      "core-util": "~0.2.0",
-      "ualloc": "~0.2.0"
+      "core-util": "~0.2.0"
     }
   }
 }

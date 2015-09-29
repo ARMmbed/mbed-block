@@ -17,9 +17,9 @@
 #ifndef __CONTAINER_WRAPPER_H__
 #define __CONTAINER_WRAPPER_H__
 
-#if defined(YOTTA_CORE_UTIL_VERSION_STRING)
+#if defined(YOTTA_MINAR_VERSION_STRING)
 // Building for mbed OS, use Array from core-util
-#include "mbed-util/Array.h"
+#include "core-util/Array.h"
 #else
 // Building for mbed Classic, use std::vector
 #include <vector>
@@ -32,37 +32,37 @@ public:
     ContainerWrapper()
         :   container()
     {
-#if defined(YOTTA_CORE_UTIL_VERSION_STRING)
+#if defined(YOTTA_MINAR_VERSION_STRING)
         UAllocTraits_t traits = {0};
 
         container.init(4, 4, traits);
 #endif
     }
-    
+
     std::size_t size() const
     {
-#if defined(YOTTA_CORE_UTIL_VERSION_STRING)
+#if defined(YOTTA_MINAR_VERSION_STRING)
         return container.get_num_elements();
 #else
         return container.size();
 #endif
     }
-        
+
     void push_back(const T& element)
     {
         container.push_back(element);
     }
-    
-    const T& at(std::size_t index) const 
+
+    const T& at(std::size_t index) const
     {
         return container.at(index);
     }
 private:
-#if defined(YOTTA_CORE_UTIL_VERSION_STRING)
+#if defined(YOTTA_MINAR_VERSION_STRING)
     mbed::util::Array<T> container;
 #else
     std::vector<T> container;
-#endif    
+#endif
 };
-    
+
 #endif // __CONTAINER_WRAPPER_H__

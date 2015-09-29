@@ -18,7 +18,6 @@
 #define __BLOCKDYNAMIC_H__
 
 #include "mbed-block/BlockStatic.h"
-#include "mbed-alloc/ualloc.h"
 
 #include <cstring>
 
@@ -29,13 +28,12 @@ public:
     BlockDynamic(uint32_t size)
         :   BlockStatic()
     {
-        UAllocTraits_t traits = {0};
-        uint8_t* buffer = (uint8_t*) mbed_ualloc(size, traits);
+        uint8_t* buffer = (uint8_t*) malloc(size);
 
         BlockStatic::setData(buffer, size);
     }
 
-    /* Take owenership of memory allocated with ualloc */
+    /* Take owenership of memory allocated with malloc */
     BlockDynamic(uint8_t* buffer, uint32_t size)
         :   BlockStatic()
     {
@@ -47,7 +45,7 @@ public:
 
     ~BlockDynamic()
     {
-        mbed_ufree(BlockStatic::getData());
+        free(BlockStatic::getData());
     }
 
     void setBlock(BlockStatic* rhs)
@@ -57,7 +55,7 @@ public:
 
     void setData(uint8_t* buffer, uint32_t size)
     {
-        mbed_ufree(BlockStatic::getData());
+        free(BlockStatic::getData());
 
         BlockStatic::setData(buffer, size);
     }
