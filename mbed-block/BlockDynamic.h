@@ -20,6 +20,7 @@
 #include "mbed-block/BlockStatic.h"
 
 #include <cstring>
+#include <cstdlib>
 
 class BlockDynamic : public BlockStatic
 {
