@@ -18,7 +18,7 @@
   "dependencies": {},
   "targetDependencies": {
     "mbed-os": {
-      "core-util": "~0.3.0"
+      "core-util": "^1.0.0"
     }
   }
 }
